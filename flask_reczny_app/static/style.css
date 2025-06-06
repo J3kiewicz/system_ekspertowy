@@ -1,0 +1,114 @@
+/* Ogólny styl dla body */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Styl dla nagłówka */
+h1 {
+    color: #2ecc71; /* Zielony kolor */
+    margin-bottom: 30px; /* Odstęp poniżej nagłówka */
+}
+
+/* Styl dla formularza preferencji */
+#preferenceForm {
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 1.2em; /* Powiększ tekst pytania */
+    color: #2c3e50; /* Kolor tekstu pytania */
+}
+
+input[type="button"] {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 1em; /* Powiększ tekst przycisków */
+    color: #fff;
+    background-color: #2ecc71; /* Zielony kolor przycisków */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="button"]:hover {
+    background-color: #27ae60; /* Ciemniejszy zielony kolor na hover */
+}
+
+#submitSection button {
+    padding: 10px 20px;
+    font-size: 1.2em; /* Powiększ tekst przycisku */
+    color: #fff;
+    background-color: #27ae60; /* Zielony kolor */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#submitSection button:hover {
+    background-color: #2ecc71; /* Jaśniejszy zielony kolor na hover */
+}
+
+/* Styl dla wyników */
+.results-container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.result-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.result-card h2 {
+    color: #27ae60; /* Zielony kolor */
+}
+
+.result-card p {
+    color: #2c3e50; /* Ciemniejszy zielony kolor */
+}
+
+.result-card img {
+    width: 300px; /* Ustalony rozmiar obrazu */
+    height: 200px; /* Ustalony rozmiar obrazu */
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #2ecc71; /* Zielony kolor */
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.back-button:hover {
+    background-color: #27ae60; /* Ciemniejszy zielony kolor */
+}

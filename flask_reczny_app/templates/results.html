@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wyniki rekomendacji</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="results-container">
+        <h1>Twoja rekomendacja:</h1>
+        <div class="result-card">
+            <h2>{{ wynik[1] }}</h2>
+            <p>{{ wynik[2] }}</p>
+            <img src="{{ url_for('static', filename='images/' + wynik[3]) }}" alt="Zdjęcie {{ wynik[1] }}">
+        </div>
+        <a href="{{ url_for('clear') }}" class="back-button">Wróć do formularza</a>
+    </div>
+</body>
+</html>

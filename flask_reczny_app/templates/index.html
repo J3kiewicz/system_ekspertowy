@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekomendacje kierunkow</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Wybierz swoje preferencje</h1>
+    <form method="POST" action="/recommend" id="preferenceForm">
+        <!-- Pytanie 1 -->
+        <div id="scisle_czy_humanistyczne">
+            <label>Wolisz nauki scisle czy humanistyczne?</label><br>
+            <input type="hidden" name="scisle_czy_humanistyczne" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Scisle" onclick="setValueAndShow('scisle_czy_humanistyczne', 'Scisle', 'co_wolisz1')">
+            <input type="button" value="Humanistyczne" onclick="setValueAndShow('scisle_czy_humanistyczne', 'Humanistyczne', 'co_wolisz2')">
+        </div>
+        <!-- Pytanie 2 -->
+        <div id="sektor" style="display:none;">
+            <label>Czy chcialbys pracowac w sektorze medycznym?</label><br>
+            <input type="hidden" name="sektor" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('sektor', 'Tak', 'ludzie')">
+            <input type="button" value="Nie" onclick="setValueAndShow('sektor', 'Nie', 'zwierzeta')">
+        </div>
+
+        <!-- Pytanie 3 -->
+        <div id="co_wolisz1" style="display:none;">
+            <label>Co wolisz?</label><br>
+            <input type="hidden" name="co_wolisz1" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Matematyka, Informatyka, Fizyka" onclick="setValueAndShow('co_wolisz1', 'Matematyka, Informatyka, Fizyka', 'nowe_technologie')">
+            <input type="button" value="Biologia, Chemia, Geografia" onclick="setValueAndShow('co_wolisz1', 'Biologia, Chemia, Geografia', 'sektor')">
+        </div>
+
+        <!-- Pytanie 4 -->
+        <div id="nowe_technologie" style="display:none;">
+            <label>Czy interesujesz sie nowymi technologiami?</label><br>
+            <input type="hidden" name="nowe_technologie" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('nowe_technologie', 'Tak', 'zainteresowania')">
+            <input type="button" value="Nie" onclick="setValueAndShow('nowe_technologie', 'Nie', 'budynki')">
+        </div>
+
+        <!-- Pytanie 5 -->
+        <div id="zainteresowania" style="display:none;">
+            <label>Co cie najbardziej interesuje?</label><br>
+            <input type="hidden" name="zainteresowania" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Systemy komunikacji" onclick="setValueAndShow('zainteresowania', 'Systemy komunikacji', 'submitSection')">
+            <input type="button" value="Programy i aplikacje" onclick="setValueAndShow('zainteresowania', 'Programy i aplikacje', 'submitSection')">
+            <input type="button" value="Mechanika i robotyka" onclick="setValueAndShow('zainteresowania', 'Mechanika i robotyka', 'submitSection')">
+        </div>
+
+        <!-- Pytanie 6 -->
+        <div id="budynki" style="display:none;">
+            <label>Czy chcialbys miec udzial w tworzeniu budynkow?</label><br>
+            <input type="hidden" name="budynki" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('budynki', 'Tak', 'technika_czy_kreatywnosc')">
+            <input type="button" value="Nie" onclick="setValueAndShow('budynki', 'Nie', 'finanse')">
+        </div>
+
+        <!-- Pytanie 7 -->
+        <div id="technika_czy_kreatywnosc" style="display:none;">
+            <label>Czy chcialbys miec udzial w bardziej technicznym czy kreatywnym aspekcie?</label><br>
+            <input type="hidden" name="technika_czy_kreatywnosc" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Technicznym" onclick="setValueAndShow('technika_czy_kreatywnosc', 'Technicznym', 'submitSection')">
+            <input type="button" value="Kreatywnym" onclick="setValueAndShow('technika_czy_kreatywnosc', 'Kreatywnym', 'submitSection')">
+        </div>
+
+        <!-- Pytanie 8 -->
+        <div id="finanse" style="display:none;">
+            <label>Czy chcialbys w swojej pracy zajmowac sie finansami?</label><br>
+            <input type="hidden" name="finanse" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('finanse', 'Tak', 'przyszlosc_zawodowa')">
+            <input type="button" value="Nie" onclick="setValueAndShow('finanse', 'Nie', 'matematyka_czy_fizyka')">
+        </div>
+
+        <!-- Pytanie 9 -->
+        <div id="przyszlosc_zawodowa" style="display:none;">
+            <label>Jak widzisz swoja przyszlosc zawodowa?</label>
+            <input type="hidden" name="przyszlosc_zawodowa" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Jako analityk, doradca" onclick="setValueAndShow('przyszlosc_zawodowa', 'Jako analityk, doradca', 'submitSection')">
+            <input type="button" value="Jako ksiegowy" onclick="setValueAndShow('przyszlosc_zawodowa', 'Jako ksiegowy', 'submitSection')">
+            <input type="button" value="Jako lider, menedzer" onclick="setValueAndShow('przyszlosc_zawodowa', 'Jako lider, menedzer', 'submitSection')">
+        </div>
+
+        <!-- Pytanie 10 -->
+        <div id="matematyka_czy_fizyka" style="display:none;">
+            <label>Matematyka czy fizyka?</label><br>
+            <input type="hidden" name="matematyka_czy_fizyka" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Matematyka" onclick="setValueAndShow('matematyka_czy_fizyka', 'Matematyka', 'submitSection')">
+            <input type="button" value="Fizyka" onclick="setValueAndShow('matematyka_czy_fizyka', 'Fizyka', 'submitSection')">
+        </div>
+
+        <!-- Pytanie 11 -->
+        <div id="ludzie" style="display:none;">
+            <label>Czy lubisz pracowac z ludzmi?</label><br>
+            <input type="hidden" name="ludzie" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('ludzie', 'Tak', 'lekarz')">
+            <input type="button" value="Nie" onclick="setValueAndShow('ludzie', 'Nie', 'chemia_czy_biologia')">
+        </div>
+
+        <!-- Pytanie 12 -->
+        <div id="chemia_czy_biologia" style="display:none;">
+            <label>Czy wolisz chemie czy biologie?</label><br>
+            <input type="hidden" name="chemia_czy_biologia" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Chemia" onclick="setValueAndShow('chemia_czy_biologia', 'Chemia', 'submitSection')">
+            <input type="button" value="Biologia" onclick="setValueAndShow('chemia_czy_biologia', 'Biologia', 'submitSection')">
+        </div>
+
+        <!-- Pytanie 13 -->
+        <div id="lekarz" style="display:none;">
+            <label>Czy chcesz miec tytul lekarza?</label><br>
+            <input type="hidden" name="lekarz" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('lekarz', 'Tak', 'jama_ustna')">
+            <input type="button" value="Nie" onclick="setValueAndShow('lekarz', 'Nie', 'chemia')">
+        </div>
+
+        <!-- Pytanie 14 -->
+        <div id="jama_ustna" style="display:none;">
+            <label>Czy chcialbys specjalizowac sie w leczeniu schorzeń jamy ustnej?</label><br>
+            <input type="hidden" name="jama_ustna" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('jama_ustna', 'Tak', 'submitSection')">
+            <input type="button" value="Nie" onclick="setValueAndShow('jama_ustna', 'Nie', 'submitSection')">
+        </div>
+
+        <!-- Pytanie 15 -->
+        <div id="chemia" style="display:none;">
+            <label>Czy chemia to twoj zywiol?</label><br>
+            <input type="hidden" name="chemia" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('chemia', 'Tak', 'submitSection')">
+            <input type="button" value="Nie" onclick="setValueAndShow('chemia', 'Nie', 'sport_i_sylwetka')">
+        </div>
+
+        <!-- Pytanie 16 -->
+        <div id="sport_i_sylwetka" style="display:none;">
+            <label>Czy sport i dbanie o sylwetke to twoja pasja?</label><br>
+            <input type="hidden" name="sport_i_sylwetka" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('sport_i_sylwetka', 'Tak', 'zywienie')">
+            <input type="button" value="Nie" onclick="setValueAndShow('sport_i_sylwetka', 'Nie', 'gdzie_pracowac')">
+        </div>
+
+        <!-- Pytanie 17 -->
+        <div id="zywienie" style="display:none;">
+            <label>Czy chcesz skupic sie na zywieniu?</label><br>
+            <input type="hidden" name="zywienie" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('zywienie', 'Tak', 'submitSection')">
+            <input type="button" value="Nie" onclick="setValueAndShow('zywienie', 'Nie', 'submitSection')">
+        </div>
+
+        <!-- Pytanie 18 -->
+        <div id="gdzie_pracowac" style="display:none;">
+            <label>Gdzie chcialbys pracowac?</label>
+            <input type="hidden" name="gdzie_pracowac" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Szpital" onclick="setValueAndShow('gdzie_pracowac', 'Szpital', 'noworodki')">
+            <input type="button" value="Karetka" onclick="setValueAndShow('gdzie_pracowac', 'Karetka', 'submitSection')">
+        </div>
+
+        <!-- Pytanie 19 -->
+        <div id="noworodki" style="display:none;">
+            <label>Czy chcialbys pracowac z noworodkami?</label><br>
+            <input type="hidden" name="noworodki" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('noworodki', 'Tak', 'submitSection')">
+            <input type="button" value="Nie" onclick="setValueAndShow('noworodki', 'Nie', 'submitSection')">
+        </div>
+
+        <!-- Pytanie 20 -->
+        <div id="zwierzeta" style="display:none;">
+            <label>Czy kochasz zwierzeta?</label><br>
+            <input type="hidden" name="zwierzeta" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('zwierzeta', 'Tak', 'leczenie_zwierzat')">
+            <input type="button" value="Nie" onclick="setValueAndShow('zwierzeta', 'Nie', 'podroze')">
+        </div>
+
+        <!-- Pytanie 21 -->
+        <div id="leczenie_zwierzat" style="display:none;">
+            <label>Czy chcialbys zajmowac sie leczeniem zwierzat?</label><br>
+            <input type="hidden" name="leczenie_zwierzat" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('leczenie_zwierzat', 'Tak', 'submitSection')">
+            <input type="button" value="Nie" onclick="setValueAndShow('leczenie_zwierzat', 'Nie', 'ekologia')">
+        </div>
+
+        <!-- Pytanie 22 -->
+        <div id="ekologia" style="display:none;">
+            <label>Czy interesujesz sie ekologia?</label><br>
+            <input type="hidden" name="ekologia" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('ekologia', 'Tak', 'submitSection')">
+            <input type="button" value="Nie" onclick="setValueAndShow('ekologia', 'Nie', 'submitSection')">
+        </div>
+
+        <!-- Pytanie 23 -->
+        <div id="podroze" style="display:none;">
+            <label>Czy lubisz podroze?</label><br>
+            <input type="hidden" name="podroze" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('podroze', 'Tak', 'submitSection')">
+            <input type="button" value="Nie" onclick="setValueAndShow('podroze', 'Nie', 'submitSection')">
+        </div>
+        <!-- Pytanie 24 -->
+        <div id="co_wolisz2" style="display:none;">
+            <label>Co wolisz?</label><br>
+            <input type="hidden" name="co_wolisz2" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Historia, WOS" onclick="setValueAndShow('co_wolisz2', 'Historia, WOS', 'prawo')">
+            <input type="button" value="Zajecia jezykowe" onclick="setValueAndShow('co_wolisz2', 'Zajecia jezykowe', 'jezyk_obce')">
+        </div>
+
+        <!-- Pytanie 25 -->
+        <div id="prawo" style="display:none;">
+            <label>Czy chcialbys zajmowac sie ochrona prawa?</label><br>
+            <input type="hidden" name="prawo" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('prawo', 'Tak', 'submitSection')">
+            <input type="button" value="Nie" onclick="setValueAndShow('prawo', 'Nie', 'administracja')">
+        </div>
+
+        <!-- Pytanie 26 -->
+        <div id="administracja" style="display:none;">
+            <label>Jaka administracja chcialbys sie zajmowac?</label><br>
+            <input type="hidden" name="administracja" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Miedzynarodowa" onclick="setValueAndShow('administracja', 'Miedzynarodowa', 'submitSection')">
+            <input type="button" value="Krajowa" onclick="setValueAndShow('administracja', 'Krajowa', 'submitSection')">
+        </div>
+
+        <!-- Pytanie 27 -->
+        <div id="jezyk_obce" style="display:none;">
+            <label>Czy lubisz jezyki obce?</label><br>
+            <input type="hidden" name="jezyk_obce" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('jezyk_obce', 'Tak', 'angielski')">
+            <input type="button" value="Nie" onclick="setValueAndShow('jezyk_obce', 'Nie', 'lubisz_robic')">
+        </div>
+
+        <!-- Pytanie 28 -->
+        <div id="angielski" style="display:none;">
+            <label>Czy chcialbys nauczyc sie innego jezyka niz jezyk angielski?</label><br>
+            <input type="hidden" name="angielski" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('angielski', 'Tak', 'kultura')">
+            <input type="button" value="Nie" onclick="setValueAndShow('angielski', 'Nie', 'submitSection')">
+        </div>
+
+        <!-- Pytanie 29 -->
+        <div id="kultura" style="display:none;">
+            <label>Jaka kultura sie interesujesz?</label><br>
+            <input type="hidden" name="kultura" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Krajow nordyckich" onclick="setValueAndShow('kultura', 'Krajow nordyckich', 'submitSection')">
+            <input type="button" value="Japonii" onclick="setValueAndShow('kultura', 'Japonii', 'submitSection')">
+            <input type="button" value="Chin" onclick="setValueAndShow('kultura', 'Chin', 'submitSection')">
+            <input type="button" value="Krajow niemiecko-jezykowych" onclick="setValueAndShow('kultura', 'Krajow niemiecko-jezykowych', 'submitSection')">
+            <input type="button" value="Krajow romańsko-jezykowych" onclick="setValueAndShow('kultura', 'Krajow romańsko-jezykowych', 'submitSection')">
+            <input type="button" value="Krajow slowiańskich" onclick="setValueAndShow('kultura', 'Krajow slowiańskich', 'submitSection')">
+        </div>
+
+        <!-- Pytanie 30 -->
+        <div id="lubisz_robic" style="display:none;">
+            <label>Co lubisz robic najbardziej?</label><br>
+            <input type="hidden" name="lubisz_robic" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Pisac wlasne teksty" onclick="setValueAndShow('lubisz_robic', 'Pisac wlasne teksty', 'submitSection')">
+            <input type="button" value="Pomagac innym" onclick="setValueAndShow('lubisz_robic', 'Pomagac innym', 'submitSection')">
+            <input type="button" value="Zajmowac sie kultura i sztuka" onclick="setValueAndShow('lubisz_robic', 'Zajmowac sie kultura i sztuka', 'instytucje_kulturalne')">
+            <input type="button" value="Pracowac w mediach i reklamie" onclick="setValueAndShow('lubisz_robic', 'Pracowac w mediach i reklamie', 'submitSection')">
+        </div>
+
+        <!-- Pytanie 31 -->
+        <div id="instytucje_kulturalne" style="display:none;">
+            <label>Czy interesuje cie promocja kultury i praca w instytucjach kulturalnych?</label><br>
+            <input type="hidden" name="instytucje_kulturalne" value=""> <!-- Ukryte pole -->
+            <input type="button" value="Tak" onclick="setValueAndShow('instytucje_kulturalne', 'Tak', 'submitSection')">
+            <input type="button" value="Nie" onclick="setValueAndShow('instytucje_kulturalne', 'Nie', 'submitSection')">
+        </div>
+        <!-- Sekcja przesylania -->
+        <div id="submitSection" style="display:none;">
+            <button type="button" onclick="submitForm()">Zatwierdź</button>
+
+        </div>
+    </form>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
